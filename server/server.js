@@ -10,7 +10,8 @@ app.use(express.json());
 
 db.sequelize.sync();
 
-require('./routes/student.routes')(app);
+require("./routes/student.routes")(app);
+require("./routes/user.routes")(app);
 
 app.listen(port, () => {
     console.log('Server is running on port: ' + port);

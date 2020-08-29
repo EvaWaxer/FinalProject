@@ -33,3 +33,42 @@ exports.create = (req, res) => {
         });
       });
   };
+
+  // Find a single user with an id
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+
+  Tutorial.findByPk(id)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving Student with id=" + id,
+      });
+    });
+};
+  // Update a student
+exports.update = (req, res) => {
+    const id = req.params.id;
+  
+    Student.update(req.body, {
+      where: { id: id },
+    })
+      .then((num) => {
+        if (num == 1) {
+          res.send({
+            message: "Student was updated successfully.",
+          });
+        } else {
+          res.send({
+            message: `Cannot update Student with id=${id}. Maybe Student was not found or req.body is empty!`,
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: "Error updating Student with id=" + id,
+        });
+      });
+  };
