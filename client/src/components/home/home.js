@@ -1,17 +1,17 @@
 import React,{ useEffect } from 'react';
-import {  BrowserRouter as Router, withRouter } from 'react-router-dom';
+import {  BrowserRouter as Router,Route, withRouter } from 'react-router-dom';
 import { Image } from 'semantic-ui-react';
 import { ACCESS_TOKEN_NAME, API_BASE_URL } from '../../constants/apiContants';
 import axios from 'axios'
 
-import Navbar from "./components/navbar-component";
-import CreateStudent from "./components/create-student-component";
-import EditStudent from "./components/edit-student-component";
+import Navbar from "../navbar-component";
+import CreateStudent from "../create-student-component";
+import EditStudent from "../edit-student-component";
 
 
 function Home(props) {
     useEffect(() => {
-        axios.get(API_BASE_URL+'/users/me', { headers: { 'token': localStorage.getItem(ACCESS_TOKEN_NAME) }})
+        axios.get('http://localhost:5000/users/me', { headers: { 'token': localStorage.getItem(ACCESS_TOKEN_NAME) }})
         .then(function (response) {
             if(response.status !== 200){
               redirectToLogin()
