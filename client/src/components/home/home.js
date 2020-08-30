@@ -7,7 +7,7 @@ import axios from 'axios'
 import Navbar from "../navbar-component";
 import CreateStudent from "../create-student-component";
 import EditStudent from "../edit-student-component";
-
+import PermanentDrawerRight from "./sidebar"
 
 function Home(props) {
     useEffect(() => {
@@ -15,6 +15,9 @@ function Home(props) {
         .then(function (response) {
             if(response.status !== 200){
               redirectToLogin()
+            }
+            if(response.status.isAdmin){
+                RedirectToDashboard()
             }
         })
         .catch(function (error) {
@@ -24,6 +27,9 @@ function Home(props) {
     function redirectToLogin() {
     props.history.push('/login');
     }
+    function RedirectToDashboard(){
+      props.history.push('/dashboard')
+    }
     return(
         <div className="mt-2">
     <Router>
@@ -32,6 +38,8 @@ function Home(props) {
             <br/>
             <Route path="/student" exact component={CreateStudent} />
             <Route path="/student:id" component={EditStudent} />    
+            <PermanentDrawerRight/>
+
         </div>
     </Router>    
       </div>

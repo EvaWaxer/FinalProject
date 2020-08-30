@@ -35,6 +35,7 @@ exports.create = async (req, res) => {
     const user = {
     email: req.body.email,
     password: req.body.password,
+    isAdmin: false,
     };
       
     const salt =  await bcrypt.genSalt(10);

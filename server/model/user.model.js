@@ -10,16 +10,11 @@ const User = sequelize.define('user', {
     password: {
         type: Sequelize.STRING,
         allowNull: false
-        /*get() {
-            return () => this.getDataValue('password')
-        }
     },
-    salt: {
-        type: Sequelize.STRING,
-        get() {
-            return() => this.getDataValue('salt')
-        }*/
-    }
+    isAdmin: {
+        type:Sequelize.BOOLEAN,
+        allowNull : false
+    },
 }, {timestamps:false})
 
 return User;
