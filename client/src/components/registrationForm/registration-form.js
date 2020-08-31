@@ -1,8 +1,15 @@
 import React, {useState} from 'react';
+import { Link, Switch, Route } from "react-router-dom";
 import axios from 'axios';
 import './registration-form.css';
 import {API_BASE_URL, ACCESS_TOKEN_NAME} from '../../constants/apiContants';
 import { withRouter } from "react-router-dom";
+
+
+import LoginForm from './components/login-form';
+import RegistrationForm from './components/registrationForm/registration-form';import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
 
 function RegistrationForm(props) {
     const [state , setState] = useState({

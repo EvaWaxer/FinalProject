@@ -1,38 +1,35 @@
 import React, {useState} from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 
-import Header from './components/header/header';
-import LoginForm from './components/LoginForm/login-form';
-import RegistrationForm from './components/registrationForm/registration-form';
+
 import Home from './components/home/home';
 import PrivateRoute from './utils/private-route';
-import AlertComponent from './components/alertComponent/alert-component'; 
+import Landing from "./components/LandingComponent"
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+}));
 
 function App() {
-  const [title, updateTitle] = useState(null);
-  const [errorMessage, updateErrorMessage] = useState(null);
+  const classes = useStyles();
+
   return (
-    <Router>
-      <div className="container">
+    <div className={classes.root} dir="rtl">
       <Switch>
-            <Route path="/" exact={true}>
-              <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle}/>
-            </Route>
-            <Route path="/register">
-              <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle}/>
-            </Route>
-            <Route path="/login">
-              <LoginForm showError={updateErrorMessage} updateTitle={updateTitle}/>
+            <Route path="/" exact component={Landing}>
             </Route>
             <PrivateRoute path="/homepage">
               <Home/>
             </PrivateRoute>
           </Switch>
-          <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
       </div>  
-    </Router>
   );
 }
 
