@@ -43,11 +43,7 @@ function LoginForm(props) {
         props.history.push('/homepage');
     } 
     return(
-      <Dialog>
-        <DialogTitle>
-          כניסה
-        </DialogTitle>
-        <DialogContent>
+
         <Grid container spacing={2}>
         <Grid item xs={12} className="form-group">
           <TextField
@@ -93,8 +89,6 @@ function LoginForm(props) {
             </p>
           </Grid>
         </Grid>
-        </DialogContent>
-        </Dialog>
 
     )
 }
