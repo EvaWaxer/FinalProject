@@ -1,12 +1,7 @@
 import React,{ useEffect } from 'react';
-import {  BrowserRouter as Router,Route, withRouter } from 'react-router-dom';
+import {  BrowserRouter as Router, withRouter } from 'react-router-dom';
 import { LOGIN_TOKEN_NAME } from '../../constants/apiContants';
 import axios from 'axios'
-
-import Admin from "../HeaderComponent"
-import CreateStudent from "../create-student-component";
-import EditStudent from "../edit-student-component";
-import PermanentDrawerRight from "./sidebar"
 
 function Home(props) {
     useEffect(() => {

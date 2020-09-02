@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -8,8 +8,6 @@ import PrivateRoute from "./utils/private-route";
 import Landing from "./components/LandingComponent";
 import Register from "./components/RegistrationForm";
 import Admin from "./components/AdminComponent";
-import Students from "./components/StudentsComponent";
-import Schools from "./components/SchoolsMangmentComponent"
  
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +33,7 @@ function App() {
         <PrivateRoute path="/admin">
           <Admin/>
         </PrivateRoute>
+
       </Switch>
     </div>
   );

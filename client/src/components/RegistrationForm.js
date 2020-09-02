@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Link, Switch, Route } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import axios from 'axios';
-import {LOGIN_TOKEN_NAME, ADMIN_TOKEN_NAME} from '../constants/apiContants';
+import {LOGIN_TOKEN_NAME} from '../constants/apiContants';
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -44,9 +43,7 @@ function RegistrationForm(props) {
             });    
     }     
 }
-const redirectToHome = () => {
-    props.history.push('/homepage');
-}
+
 const redirectToLogin = () => {
     props.history.push('/login'); 
 }

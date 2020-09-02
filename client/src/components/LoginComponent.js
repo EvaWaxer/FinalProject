@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
-import { API_BASE_URL, LOGIN_TOKEN_NAME } from "../constants/apiContants";
+import { LOGIN_TOKEN_NAME } from "../constants/apiContants";
 
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -40,61 +40,61 @@ function LoginComponent(props) {
   const redirectToHome = () => {
     props.history.push("/homepage");
   };
-  return (
-    <Dialog open={true} maxWidth="xs">
-      <DialogTitle> כניסה</DialogTitle>
-      <DialogContent>
-        <Grid container spacing={2}>
-          <Grid item xs={12} className="form-group">
-            <TextField
-              variant="outlined"
-              required
-              fullWidth
-              id="Email"
-              label="Email"
-              name="Email"
-              autoComplete="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Grid>
+    return (
+      <Dialog open={true} maxWidth="xs">
+        <DialogTitle> כניסה</DialogTitle>
+        <DialogContent>
+          <Grid container spacing={2}>
+            <Grid item xs={12} className="form-group">
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="Email"
+                label="Email"
+                name="Email"
+                autoComplete="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Grid>
 
-          <Grid item xs={12} className="form-group">
-            <TextField
-              variant="outlined"
-              required
-              fullWidth
-              id="Password"
-              label="Password"
-              name="Password"
-              type="password"
-              autoComplete="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Grid>
+            <Grid item xs={12} className="form-group">
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="Password"
+                label="Password"
+                name="Password"
+                type="password"
+                autoComplete="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Grid>
 
-          <Grid item xs={12} className="form-group">
-            <Button
-              type="submit"
-              fullWidth
-              color="primary"
-              variant="contained"
-              onClick={handleSubmitClick}
-            >
-              כניסה
-            </Button>
-          </Grid>
+            <Grid item xs={12} className="form-group">
+              <Button
+                type="submit"
+                fullWidth
+                color="primary"
+                variant="contained"
+                onClick={handleSubmitClick}
+              >
+                כניסה
+              </Button>
+            </Grid>
 
-          <Grid item xs={12} className="form-group">
-            <p className="forgot-password text-right">
-               <a href="/Register">הרשמה</a>
-            </p>
+            <Grid item xs={12} className="form-group">
+              <p className="forgot-password text-right">
+                <a href="/Register">הרשמה</a>
+              </p>
+            </Grid>
           </Grid>
-        </Grid>
-      </DialogContent>
-    </Dialog>
-  );
+        </DialogContent>
+      </Dialog>
+    );
 }
 
 export default withRouter(LoginComponent);
