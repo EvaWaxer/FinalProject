@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Switch } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
+import Login from "./components/LoginComponent";
 import Home from "./components/home/home";
 import PrivateRoute from "./utils/private-route";
 import Landing from "./components/LandingComponent";
-import Login from "./components/login-form";
-import Register from "./components/registrationForm/registration-form";
-
+import Register from "./components/RegistrationForm";
+import Admin from "./components/AdminComponent";
+import Students from "./components/StudentsComponent";
+import Schools from "./components/SchoolsMangmentComponent"
+ 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -29,6 +31,9 @@ function App() {
         <Route path="/register" component={Register} />
         <PrivateRoute path="/homepage">
           <Home />
+        </PrivateRoute>
+        <PrivateRoute path="/admin">
+          <Admin/>
         </PrivateRoute>
       </Switch>
     </div>
