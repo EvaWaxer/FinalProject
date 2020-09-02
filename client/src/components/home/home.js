@@ -1,23 +1,26 @@
 import React,{ useEffect } from 'react';
 import {  BrowserRouter as Router,Route, withRouter } from 'react-router-dom';
-import { Image } from 'semantic-ui-react';
-import { ACCESS_TOKEN_NAME, API_BASE_URL } from '../../constants/apiContants';
+import { LOGIN_TOKEN_NAME } from '../../constants/apiContants';
 import axios from 'axios'
 
-import Navbar from "../navbar-component";
+import Admin from "../HeaderComponent"
 import CreateStudent from "../create-student-component";
 import EditStudent from "../edit-student-component";
 import PermanentDrawerRight from "./sidebar"
 
 function Home(props) {
     useEffect(() => {
-        axios.get('http://localhost:5000/users/me', { headers: { 'token': localStorage.getItem(ACCESS_TOKEN_NAME) }})
+        axios.get('http://localhost:5000/users/me', { headers: { 'token': localStorage.getItem(LOGIN_TOKEN_NAME) }})
         .then(function (response) {
+          if(response.status === 200)
+          {
+            RedirectToAdmin();
+          }
             if(response.status !== 200){
               redirectToLogin()
             }
             if(response.status.isAdmin){
-                RedirectToDashboard()
+               //RedirectToDashboard()
             }
         })
         .catch(function (error) {
@@ -27,18 +30,13 @@ function Home(props) {
     function redirectToLogin() {
     props.history.push('/login');
     }
-    function RedirectToDashboard(){
-      props.history.push('/dashboard')
+    function RedirectToAdmin(){
+      props.history.push('/admin')
     }
     return(
-        <div className="mt-2">
+        <div className="mt-2" dir='rtl'>
     <Router>
         <div className="container"> 
-            <Navbar />
-            <br/>
-            <Route path="/student" exact component={CreateStudent} />
-            <Route path="/student:id" component={EditStudent} />    
-            <PermanentDrawerRight/>
 
         </div>
     </Router>    
@@ -47,3 +45,11 @@ function Home(props) {
 }
 
 export default withRouter(Home);
+
+/**
+ *            <br/>
+            <Route path="/student" exact component={CreateStudent} />
+            <Route path="/student:id" component={EditStudent} />    
+            <PermanentDrawerRight/>
+
+ */
