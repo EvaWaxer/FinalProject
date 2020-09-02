@@ -5,6 +5,12 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/styles";
 
 import { CssBaseline, createMuiTheme } from "@material-ui/core";
+import { create } from 'jss';
+import rtl from 'jss-rtl';
+import { StylesProvider, jssPreset } from '@material-ui/core/styles';
+
+const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
+
 const theme = createMuiTheme({
   palette: {
     type: "dark",
@@ -16,10 +22,12 @@ const theme = createMuiTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
+      <StylesProvider jss={jss}>
       <CssBaseline />
       <BrowserRouter>
         <App />
       </BrowserRouter>
+      </StylesProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")

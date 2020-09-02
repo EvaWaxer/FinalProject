@@ -12,6 +12,7 @@ db.sequelize.sync();
 
 require("./routes/student.routes")(app);
 require("./routes/user.routes")(app);
+require("./routes/school.routes")(app);
 
 app.listen(port, () => {
     console.log('Server is running on port: ' + port);
