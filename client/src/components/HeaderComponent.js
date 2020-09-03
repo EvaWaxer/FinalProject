@@ -29,7 +29,7 @@ const HeaderComponent = () => {
     <div className={classes.root} dir="rtl">
       <AppBar position="fixed" className={classes.appBar} color="default">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}> 
+          <Typography variant="h6" className={classes.title} align="left">
             מערכת לרישום ושיבוץ תלמידים
           </Typography>
           <Button color="inherit" component={Link} to="/login">
