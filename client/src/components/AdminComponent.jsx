@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Switch, Route } from "react-router-dom"; 
+import { Link, Switch, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,7 +12,8 @@ import Header from "./HeaderComponent";
 
 //import Users from "./components/Users";
 import Students from "./StudentsComponent";
-import Schools from "./SchoolsMangmentComponent"
+import Schools from "./SchoolsMangmentComponent";
+import AddSchool from "./AddSchoolComponent";
 
 const drawerWidth = 240;
 
@@ -56,19 +57,18 @@ const AdminComponent = () => {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            
-          <ListItem button component={Link} to='/admin/students'>
+            <ListItem button component={Link} to="/admin/students">
               <ListItemText primary="תלמידים" />
             </ListItem>
-          
-            <ListItem button component={Link} to='/admin/schools'>
+
+            <ListItem button component={Link} to="/admin/schools">
               <ListItemText primary="בתי ספר" />
             </ListItem>
-            <ListItem button >
+            <ListItem button>
               <ListItemText primary="שיבוץ" />
             </ListItem>
-            <Divider/>
-            <ListItem button >
+            <Divider />
+            <ListItem button>
               <ListItemText primary="הגדרות" />
             </ListItem>
           </List>
@@ -77,14 +77,14 @@ const AdminComponent = () => {
       <main className={classes.content}>
         <Toolbar />
         <Switch>
-          <Route exact path="/admin/students" component={Students} />
-          <Route exact path="/admin/schools" component={Schools} />
+          <Route path="/admin/students" component={Students} />
+          <Route path="/admin/schools" component={Schools} />
         </Switch>
       </main>
     </div>
   );
-}
-export default AdminComponent
+};
+export default AdminComponent;
 
 // <Route exact path="/Admin/Student" component={Student} />
-         // <Route path="/Admin/Users" component={Users} />
+// <Route path="/Admin/Users" component={Users} />
