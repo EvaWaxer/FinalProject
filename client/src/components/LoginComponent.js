@@ -42,7 +42,7 @@ function LoginComponent(props) {
   };
     return (
       <Dialog open={true} maxWidth="xs">
-        <DialogTitle> כניסה</DialogTitle>
+        <DialogTitle align="left"> כניסה</DialogTitle>
         <DialogContent>
           <Grid container spacing={2}>
             <Grid item xs={12} className="form-group">

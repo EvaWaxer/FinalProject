@@ -38,7 +38,7 @@ exports.create = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Tutorial.findByPk(id)
+  Student.findByPk(id)
     .then((data) => {
       res.send(data);
     })
@@ -72,3 +72,16 @@ exports.update = (req, res) => {
         });
       });
   };
+
+exports.findAll = (req,res) => {
+  Student.findAll()
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving Students.",
+    });
+  });
+};

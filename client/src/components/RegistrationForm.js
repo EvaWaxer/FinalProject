@@ -49,7 +49,7 @@ const redirectToLogin = () => {
 }
   return (
     <Dialog open={true} maxWidth="xs">
-      <DialogTitle> הרשמה</DialogTitle>
+      <DialogTitle align="left"> הרשמה</DialogTitle>
       <DialogContent>
         <Grid container spacing={2}>
           <Grid item xs={12} className="form-group">
