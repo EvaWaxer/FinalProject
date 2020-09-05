@@ -1,7 +1,7 @@
 module.exports = {
   HOST: "localhost",
   USER: "postgres",
-  PASSWORD: "postgres",
+  PASSWORD: "hava1990",
   DB: "Final_Project",
   dialect: "postgres",
   pool: {

@@ -8,31 +8,29 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from '@material-ui/core/styles';
 
 import AddSchool from "./AddSchoolComponent";
-/*
-const[schools, setSchools] = useState([]);
 
-const useStyles = makeStyles({
-    table: {
-      minWidth: 650,
-    },
-  });
-
-  const retriveSchools = async() => {
-    let data = await axios
-    .get("http://localhost:5000/schools/")
-    .then((response) => {
-        var rows = response.data;
-        setSchools(rows);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
 
   const Schools = () => {
+    const[schools, setSchools] = useState([]);
+
+    const useStyles = makeStyles({
+        table: {
+          minWidth: 650,
+        },
+      });
+    
+      const getSchools = async() => {
+         const schools = await axios
+        .get("http://localhost:5000/schools/");
+    
+        setSchools(schools.data);
+        console.log("Hello im getting schools");
+      };
+    
+      useEffect(() => {getSchools();}, []);
+    
     const classes = useStyles();
-    retriveSchools()
-    //componentDidMount();
+
     return (
     <div dir="rtl">
       <h1>ניהול בתי ספר</h1>
@@ -82,8 +80,8 @@ const useStyles = makeStyles({
 };
 
 export default Schools;
-*/
 
+/*
 
 export default class Schools extends Component{
     state = {schools : []};
