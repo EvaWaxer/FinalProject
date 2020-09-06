@@ -1,37 +1,65 @@
-import React, { Component ,  useState, useEffect  } from "react";
+import React, { Component, useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Link, Switch, Route } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
-import { Grid, Table, TableRow, TableCell, TableBody,TableHead,TableContainer } from "@material-ui/core";
+import {
+  Grid,
+  Table,
+  TableRow,
+  TableCell,
+  TableBody,
+  TableHead,
+  TableContainer,
+} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 import AddSchool from "./AddSchoolComponent";
 
+import {
+  fetchSchoolsPending,
+  fetchSchoolsSuccess,
+  fetchSchoolsError,
+} from "../actions/fetchSchoolsActions";
 
-  const Schools = () => {
-    const[schools, setSchools] = useState([]);
+const Schools = () => {
+  //const [schools, setSchools] = useState([]);
+  const schoolsReducer = useSelector((state) => state.fetchSchoolsReducer);
+  const [schoolsUpdate, setSchoolsUpdate] = useState(false);
 
-    const useStyles = makeStyles({
-        table: {
-          minWidth: 650,
-        },
-      });
-    
-      const getSchools = async() => {
-         const schools = await axios
-        .get("http://localhost:5000/schools/");
-    
-        setSchools(schools.data);
-        console.log("Hello im getting schools");
-      };
-    
-      useEffect(() => {getSchools();}, []);
-    
-    const classes = useStyles();
+  const dispatch = useDispatch();
 
-    return (
+  const useStyles = makeStyles({
+    table: {
+      minWidth: 650,
+    },
+  });
+
+  const getSchools = useCallback(() => {
+    {
+      dispatch(fetchSchoolsPending());
+      axios
+        .get("http://localhost:5000/schools/")
+        .then((res) => {
+          console.log(res);
+          dispatch(fetchSchoolsSuccess(res.data));
+          console.log("Hello im getting schools");
+        })
+        .catch((error) => {
+          dispatch(fetchSchoolsError(error));
+        });
+    }
+  });
+
+  useEffect(() => {
+    getSchools();
+  }, []);
+
+  const classes = useStyles();
+
+  return (
     <div dir="rtl">
       <h1>ניהול בתי ספר</h1>
       <Grid container spacing={2}>
@@ -46,29 +74,29 @@ import AddSchool from "./AddSchoolComponent";
             הוסף בית ספר
           </Button>
         </Grid>
-        <Grid item xs={12} className="form-group" >
-            <TableContainer>
-        <Table className={classes.table} aria-label="students table">
-            <TableHead>
+        <Grid item xs={12} className="form-group">
+          <TableContainer>
+            <Table className={classes.table} aria-label="students table">
+              <TableHead>
                 <TableRow>
-                    <TableCell>שם</TableCell>
-                    <TableCell>כתובת</TableCell>
-                    <TableCell>מקומות פנויים</TableCell>
+                  <TableCell>שם</TableCell>
+                  <TableCell>כתובת</TableCell>
+                  <TableCell>מקומות פנויים</TableCell>
                 </TableRow>
-            </TableHead>
-            <TableBody>
-                {schools.map((row) =>(
-                                <TableRow key={row.name}>
-                                <TableCell align="center"component="th" scope="row">
-                                  {row.name}
-                                </TableCell>
-                                <TableCell align="center">{row.address}</TableCell>
-                                <TableCell align="center">{row.openSeats}</TableCell>
-                              </TableRow>
+              </TableHead>
+              <TableBody>
+                {schoolsReducer.schools.map((row) => (
+                  <TableRow key={row.name}>
+                    <TableCell align="center" component="th" scope="row">
+                      {row.name}
+                    </TableCell>
+                    <TableCell align="center">{row.address}</TableCell>
+                    <TableCell align="center">{row.openSeats}</TableCell>
+                  </TableRow>
                 ))}
-            </TableBody>            
-        </Table>
-        </TableContainer>
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Grid>
       </Grid>
       <Switch>
