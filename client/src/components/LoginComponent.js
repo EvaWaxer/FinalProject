@@ -16,6 +16,8 @@ function LoginComponent(props) {
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
+    localStorage.clear();
+
     const payload = {
       email: email,
       password: password,

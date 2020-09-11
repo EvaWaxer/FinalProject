@@ -1,26 +1,24 @@
-const { check } = require("express-validator/check");
-const auth = require("../middleware/auth");
+const {verifySignUp} = require("../middleware");
+const controller = require("../controllers/user.controller");
 
-module.exports = (app) => {
-    const users = require("../controllers/user.controller");
 
-    var router = require("express").Router();
+module.exports = function(app) {
+  app.use(function(req, res, next) {
+    res.header(
+      "Access-Control-Allow-Headers",
+      "x-access-token, Origin, Content-Type, Accept"
+    );
+    next();
+  });
 
-    router.post("/register",
-    [check("email", "Please enter a valid email").isEmail(),
-    check("password", "Please enter a valid password").isLength({
-      min: 6
-    })],
-     users.create);
-    router.post("/login", 
-    [    
-    check("email", "Please enter a valid email").isEmail(),
-    check("password", "Please enter a valid password").isLength({
-      min: 6
-    })]
-    ,users.findOne);
+  app.post(
+    "/users/signup",
+    [
+      verifySignUp.checkDuplicateUsernameOrEmail,
+      verifySignUp.checkRolesExisted
+    ],
+    controller.create
+  );
 
-    router.get("/me", auth, users.fetch);
-
-    app.use("/users", router);
+  app.post("/users/signin", controller.findOne);
 };

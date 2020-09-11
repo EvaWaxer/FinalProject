@@ -9,16 +9,24 @@ function Home(props) {
         .then(function (response) {
           if(response.status === 200)
           {
-            RedirectToAdmin();
+            RedirectToUser();
+            /*
+            console.log("home res" + response.data.user);
+            if(response.data.user.isAdmin == null)
+            {
+              RedirectToUser();
+            }
+            else if(response.data.user.isAdmin){
+              RedirectToAdmin();
+            }
+            */
           }
             if(response.status !== 200){
               redirectToLogin()
             }
-            if(response.status.isAdmin){
-               //RedirectToDashboard()
-            }
         })
         .catch(function (error) {
+          console.log(error)
           redirectToLogin()
         });
       })
@@ -27,6 +35,10 @@ function Home(props) {
     }
     function RedirectToAdmin(){
       props.history.push('/admin')
+    }
+
+    function RedirectToUser(){
+      props.history.push('/student')
     }
     return(
         <div className="mt-2" dir='rtl'>

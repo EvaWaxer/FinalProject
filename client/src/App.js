@@ -8,6 +8,7 @@ import PrivateRoute from "./utils/private-route";
 import Landing from "./components/LandingComponent";
 import Register from "./components/RegistrationForm";
 import Admin from "./components/AdminComponent";
+import CreateStudent from './components/create-student-component';
  
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +28,8 @@ function App() {
         <Route path="/" exact component={Landing} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/student" exact component={CreateStudent} />
+
         <PrivateRoute path="/homepage">
           <Home />
         </PrivateRoute>
