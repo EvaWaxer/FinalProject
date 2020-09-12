@@ -26,9 +26,11 @@ const theme = createMuiTheme({
   direction: "rtl",
 });
 
+const middleware = [thunk];
+
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
+  composeWithDevTools(applyMiddleware(...middleware))
 );
 
 ReactDOM.render(
