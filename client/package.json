@@ -22,11 +22,13 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-validation": "^3.0.7",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^1.2.1"
+    "semantic-ui-react": "^1.2.1",
+    "validator": "^13.1.17"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -48,5 +50,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
