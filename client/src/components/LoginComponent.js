@@ -75,15 +75,11 @@ function LoginComponent(props) {
           setLoading(false);
         });
     }
-
-    if (isLoggedIn) {
-      return <Redirect to="/homepage" />;
-    }
   };
 
   
     return (
-      <Dialog open={true} maxWidth="xs" ref={form}>
+      <Dialog open={true} maxWidth="xs">
         <DialogTitle align="left"> כניסה</DialogTitle>
         <DialogContent>
           <Grid container spacing={2}>
