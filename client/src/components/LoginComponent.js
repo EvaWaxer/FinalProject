@@ -1,10 +1,7 @@
-import React, { useState, useRef } from "react";
-import { withRouter, Redirect } from "react-router-dom";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 import { LOGIN_TOKEN_NAME } from "../constants/apiContants";
-import { useDispatch, useSelector } from "react-redux";
-
-import { login } from "../actions/auth"
 
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -12,72 +9,39 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
-import Alert from '@material-ui/lab/Alert';
-
-
-const redirectToHome = () => {
-  props.history.push("/homepage");
-};
-
-const required = (value) => {
-  if (!value) {
-    return (
-      <div>
-         <Alert severity="error">This field is required!</Alert>
-      </div>
-    );
-  }
-};
 
 function LoginComponent(props) {
-  const form = useRef();
-  const checkBtn = useRef();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const { isLoggedIn } = useSelector(state => state.auth);
-  const { message } = useSelector(state => state.message);
-  
-  const dispatch = useDispatch();
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
-    //localStorage.clear();
+    localStorage.clear();
 
-    setLoading(true);
-
-    form.current.validateAll();
-
-    if (checkBtn.current.context._errors.length === 0) 
-    {
-      const payload = {
-        email: email,
-        password: password,
-      };
-      axios
-        .post("http://localhost:5000/users/login", payload)
-        .then(function (response) {
-          if (response.status === 200) {
-
-           // localStorage.setItem(LOGIN_TOKEN_NAME, response.data.token);
-            redirectToHome();
-            window.location.reload();
-            //props.showError(null);
-          }  else {
-            //props.showError("Username does not exists");
-            setLoading(false);
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-          setLoading(false);
-        });
-    }
+    const payload = {
+      email: email,
+      password: password,
+    };
+    axios
+      .post("http://localhost:5000/users/login", payload)
+      .then(function (response) {
+        if (response.status === 200) {
+          localStorage.setItem(LOGIN_TOKEN_NAME, response.data.token);
+          redirectToHome();
+          props.showError(null);
+        } else if (response.code === 204) {
+          props.showError("Username and password do not match");
+        } else {
+          props.showError("Username does not exists");
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
-
-  
+  const redirectToHome = () => {
+    props.history.push("/homepage");
+  };
     return (
       <Dialog open={true} maxWidth="xs">
         <DialogTitle align="left"> כניסה</DialogTitle>
